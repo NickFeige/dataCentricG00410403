@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 // MySQL connection
 const mysqlConnection = mysql.createConnection({
   host: 'localhost',
-  user: 'NickFeige',
-  password: 'nick',
+  user: 'root',
+  password: 'root',
   database: 'proj2023',
 });
 
@@ -25,35 +25,35 @@ mysqlConnection.connect((err) => {
 });
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/proj2023MongoDB/managers', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+//mongoose.connect('mongodb://localhost:27017/proj2023MongoDB/managers', {
+  //useNewUrlParser: true,
+ // useUnifiedTopology: true,
+//});
 
-const mongoDb = mongoose.connection;
+//const mongoDb = mongoose.connection;
 
-mongoDb.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoDb.once('open', async () => {
-  console.log('Connected to MongoDB database');
+//mongoDb.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//mongoDb.once('open', async () => {
+  //console.log('Connected to MongoDB database');
 
   // Check if the 'managers' collection exists
-  const collectionExists = await mongoose.connection.db.listCollections({ name: 'managers' }).hasNext();
+  //const collectionExists = await mongoose.connection.db.listCollections({ name: 'managers' }).hasNext();
 
   // If 'managers' collection does not exist, import initial data
-  if (!collectionExists) {
-    const managersData = [
-      { _id: 'M001', name: 'Mark Collins', salary: 50500.01 },
-      { _id: 'M002', name: "Barbara O'Toole", salary: 43512.14 },
-      { _id: 'M003', name: 'Paddy McDonagh', salary: 51412 },
-      { _id: 'M004', name: 'Josie Sullivan', salary: 49444 },
-      { _id: 'M005', name: 'Tommy Hyde', salary: 47234 },
-      { _id: 'M006', name: 'Anne Mulligan', salary: 36300 },
-    ];
+  //if (!collectionExists) {
+   // const managersData = [
+      //{ _id: 'M001', name: 'Mark Collins', salary: 50500.01 },
+     // { _id: 'M002', name: "Barbara O'Toole", salary: 43512.14 },
+      //{ _id: 'M003', name: 'Paddy McDonagh', salary: 51412 },
+     // { _id: 'M004', name: 'Josie Sullivan', salary: 49444 },
+      //{ _id: 'M005', name: 'Tommy Hyde', salary: 47234 },
+     // { _id: 'M006', name: 'Anne Mulligan', salary: 36300 },
+   // ];
 
-    await mongoose.connection.db.collection('managers').insertMany(managersData);
-    console.log('Initial data imported into MongoDB collection: managers');
-  }
-});
+   // await mongoose.connection.db.collection('managers').insertMany(managersData);
+   // console.log('Initial data imported into MongoDB collection: managers');
+  //}
+//});
 
 // Define routes and middleware
 app.get('/', (req, res) => {
@@ -132,7 +132,7 @@ app.post('/stores/edit/:storeId', async (req, res) => {
   const { location, mgrid } = req.body;
 
   // Fetch manager details from MongoDB for validation
-  const managerDetails = await mongoose.connection.db.collection('managers').findOne({ _id: mgrid });
+  //const managerDetails = await mongoose.connection.db.collection('managers').findOne({ _id: mgrid });
 
   if (!managerDetails) {
     res.status(400).send('Invalid Manager ID');
