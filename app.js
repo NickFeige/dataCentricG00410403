@@ -92,6 +92,7 @@ app.get('/stores', (req, res) => {
   });
 });
 
+
 // Edit Store Page - GET request
 app.get('/stores/edit/:storeId', async (req, res) => {
   const storeId = req.params.storeId;
