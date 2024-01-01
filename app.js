@@ -159,7 +159,7 @@ app.post('/stores/edit/:storeId', async (req, res) => {
 
 // Add Store Page
 app.get('/stores/add', (req, res) => {
-  // Render the Add Store Page with a form for adding a new store
+  
   res.send(`
     <h1>Add Store</h1>
     <!-- Add a form for adding a new store -->
